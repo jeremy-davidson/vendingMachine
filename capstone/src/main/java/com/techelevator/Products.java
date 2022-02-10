@@ -33,4 +33,5 @@ public abstract class Products {
     private void setPrice(double price) {
         this.price = price;
     }
+
 }
