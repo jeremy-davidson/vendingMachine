@@ -31,6 +31,8 @@ public class VendingMachineCLI {
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
 				while (true) {
+
+
 					String[] productArray = new String[inventoryMap.size()];
 					int counter = 0;
 					Set<Map.Entry<String, Products>> entrySet = inventoryMap.entrySet();
@@ -48,7 +50,7 @@ public class VendingMachineCLI {
 				// do purchase
 			}
 		}
-	}
+//	}
 
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
