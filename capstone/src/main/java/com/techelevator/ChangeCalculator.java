@@ -4,7 +4,7 @@ import com.techelevator.view.Menu;
 
 public class ChangeCalculator {
 
-    //calculates the required change in least amount of coins possible
+    //calculates the required change in the least amount of coins possible
 
     public void change(double coins) {
 
