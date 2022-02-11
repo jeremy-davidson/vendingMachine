@@ -27,11 +27,11 @@ public class ChangeCalculator {
             nickles = nickles + 1;
             coins = coins - 0.05;
         }
-        while (coins >= 0.01) {             //redundant for this project but added any
+        while (coins >= 0.01) {             //redundant for this project but added
             pennies = pennies + 1;
             coins = coins - 0.01;
         }
-
+//TODO create child class change to hold change
         System.out.println("Your change is " + quarters + " quarters, " + dimes + " dimes and " + nickles + " nickles.");
     }
 

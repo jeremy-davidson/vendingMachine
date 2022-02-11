@@ -52,8 +52,8 @@ public class Menu {
 	}
 	public void displayMenuOptionsForItems(Object[] options) {
 		out.println();
-		String str = String.format("%1$-7s %2$-13s %3$7s %4$10s", "Slot Location", "Product Name", "Price", "Quantity");
-		out.println(str);
+//		String str = String.format("%1$-7s %2$-13s %3$12s %4$10s", "Slot", "Product Name", "Price", "Quantity");
+		//out.println(str);
 		for(int i = 0; i < options.length; i++) {
 			out.println(options[i]);
 		}
