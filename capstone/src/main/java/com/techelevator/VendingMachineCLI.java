@@ -39,11 +39,14 @@ public class VendingMachineCLI {
     }
 
     public void run() {
+        System.out.println("********************************\n" +
+                "***Welcome to Vendo-Matic 800***\n" +
+                "********************************");
         while (true) {
             String choice = (String) this.inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
             if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-                 //display vending machine items
+                //display vending machine items
                 while (true) {
                     String[] productArray = new String[vendingMachine.getInventory().size()];
                     int counter = 0;
