@@ -21,9 +21,14 @@ public class VendingMachineCLI {
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
     private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
     private static final String FEED_MONEY = "Feed Money";
-    private static final String PRODUCT_SELECTION = "Select Product";
-    private static final String FINISH = "Finish";
-    private static final String[] PURCHASE_MENU_OPTIONS = {FEED_MONEY, PRODUCT_SELECTION, FINISH};
+    private static final String SELECT_PRODUCT = "Select Product";
+    private static final String FINISH_TRANSACTION = "Finish";
+    private static final String[] PURCHASE_MENU_OPTIONS = {FEED_MONEY, SELECT_PRODUCT, FINISH_TRANSACTION};
+    private static final String FEED_ONE_DOLLAR = "Feed One Dollar";
+    private static final String FEED_FIVE_DOLLARS = "Feed Five Dollars";
+    private static final String FEED_TEN_DOLLARS = "Feed Ten Dollars";
+    private static final String[] FEED_MONEY_OPTIONS = {FEED_ONE_DOLLAR, FEED_FIVE_DOLLARS, FEED_TEN_DOLLARS};
+    private static final String RETURN_TO_MAIN_MENU = "Return to Main Menu";
     private Menu inventory;
     private VendingMachine vendingMachine;
     //List<Products> purchasedProducts = new ArrayList<>();
@@ -38,10 +43,8 @@ public class VendingMachineCLI {
             String choice = (String) this.inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
             if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-                // display vending machine items
+                 //display vending machine items
                 while (true) {
-
-
                     String[] productArray = new String[vendingMachine.getInventory().size()];
                     int counter = 0;
                     Set<Map.Entry<String, Products>> entrySet = vendingMachine.getInventory().entrySet();
@@ -55,8 +58,24 @@ public class VendingMachineCLI {
                     break;
                 }
             } else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {//do purchase
+                System.out.println("Current Money Provided: $" + vendingMachine.getCurrentMoneyProvided());
                 choice = (String) this.inventory.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
+                if (choice.equals(FEED_MONEY)) {
+                    choice = (String) this.inventory.getChoiceFromOptions(FEED_MONEY_OPTIONS);
+                    if (choice.equals(FEED_ONE_DOLLAR)) {
+                        vendingMachine.feedMoney(1.00);
+                    }
+                    if (choice.equals(FEED_FIVE_DOLLARS)) {
+                        vendingMachine.feedMoney(5.00);
+                    }
+                    if (choice.equals(FEED_TEN_DOLLARS)) {
+                        vendingMachine.feedMoney(10.00);
+                    }
+                }
+                if (choice.equals(SELECT_PRODUCT)) {
+
+                }
             }
 
 //        } else {

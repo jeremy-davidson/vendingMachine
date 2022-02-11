@@ -20,11 +20,22 @@ public class VendingMachine {
 
     //variables
     private double startingBalance = 0;
+    public double currentMoneyProvided = 0;
     private Map<String, Products> inventory;
+
 
     public double getStartingBalance() {
         return startingBalance;
     }
+
+    public double getCurrentMoneyProvided() {
+        return currentMoneyProvided;
+    }
+
+    public void feedMoney(double moneyFed) {
+        currentMoneyProvided = currentMoneyProvided + moneyFed;
+    }
+
 
 //    String path = "C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\vendingmachine.csv";
 //    File inputFile = new File(path);
@@ -69,10 +80,24 @@ public class VendingMachine {
         } catch (FileNotFoundException e) {
             System.out.println("Error loading...");
         }
-        System.out.println(inventory.keySet());
         return inventory;
 
     }
+public void displayItems() {// was working on this method for displaying items...
+    while (true) {
+        String[] productArray = new String[getInventory().size()];
+        int counter = 0;
+        Set<Map.Entry<String, Products>> entrySet = getInventory().entrySet();
+        for (Map.Entry<String, Products> entry : entrySet) {
+            String key = entry.getKey();
+            Products value = entry.getValue();
+            productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
+            counter++;
+        }
+     //   this.inventory.displayMenuOptionsForItems(productArray);
+        break; }
+    return ;
+}
 
 
 }
