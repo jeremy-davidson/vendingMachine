@@ -83,21 +83,25 @@ public class VendingMachine {
         return inventory;
 
     }
-public void displayItems() {// was working on this method for displaying items...
-    while (true) {
-        String[] productArray = new String[getInventory().size()];
-        int counter = 0;
-        Set<Map.Entry<String, Products>> entrySet = getInventory().entrySet();
-        for (Map.Entry<String, Products> entry : entrySet) {
-            String key = entry.getKey();
-            Products value = entry.getValue();
-            productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
-            counter++;
-        }
-     //   this.inventory.displayMenuOptionsForItems(productArray);
-        break; }
-    return ;
-}
+//public String[] displayItems() {// was working on this method for displaying items...PRINTING INFINITE LOOP!
+//        //    while (true) {
+////        String[] productArray = new String[getInventory().size()];
+////        int counter = 0;
+////        Set<Map.Entry<String, Products>> entrySet = getInventory().entrySet();
+////        for (Map.Entry<String, Products> entry : entrySet) {
+////            String key = entry.getKey();
+////            Products value = entry.getValue();
+////            productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
+////            counter++;
+////        }
+////        //System.out.println(productArray);
+////         for (int i = 0; i < counter; i++) {
+////            System.out.println(productArray[i]);
+////        }
+////
+////    }
+//}
+
 
 
 }

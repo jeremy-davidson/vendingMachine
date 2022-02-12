@@ -31,6 +31,7 @@ public class VendingMachineCLI {
     private static final String RETURN_TO_MAIN_MENU = "Return to Main Menu";
     private Menu inventory;
     private VendingMachine vendingMachine;
+    private Products products;
     //List<Products> purchasedProducts = new ArrayList<>();
 
     public VendingMachineCLI(Menu menu) {
@@ -77,6 +78,10 @@ public class VendingMachineCLI {
                     }
                 }
                 if (choice.equals(SELECT_PRODUCT)) {
+                   vendingMachine.displayItems();
+
+                    }
+
 
                 }
             }
@@ -87,4 +92,4 @@ public class VendingMachineCLI {
 //        }
         }
     }
-}
+
