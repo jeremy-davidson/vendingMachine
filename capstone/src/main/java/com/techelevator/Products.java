@@ -11,9 +11,10 @@ public abstract class Products {
 
 
     //constructors
-    public Products(String name, double price) {
+    public Products(String name, double price/*, int numberInStock*/) {
         this.name = name;
         this.price = price;
+        //this.numberInStock = numberInStock;
     }
 
     //getters

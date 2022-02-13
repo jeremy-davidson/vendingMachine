@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import com.techelevator.Products;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -40,6 +42,18 @@ public class Menu {
 			out.println(System.lineSeparator() + "*** " + userInput + " is not a valid option ***" + System.lineSeparator());
 		}
 		return choice;
+	}
+	//Get Slot selection from user...
+
+	public String getSlotChoiceFromUserInput() {
+		String slotChoice = null;
+		System.out.println("Please input slot location for desired item >>>");
+		slotChoice = in.nextLine();
+
+		if (slotChoice == null || slotChoice == " ") {
+			out.println(System.lineSeparator() + "*** " + slotChoice + " is not a valid option ***" + System.lineSeparator());
+		}
+		return slotChoice;
 	}
 
 	private void displayMenuOptions(Object[] options) {

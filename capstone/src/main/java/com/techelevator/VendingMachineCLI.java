@@ -66,7 +66,7 @@ public class VendingMachineCLI {
 
                 while (true) {
                     //print currentMoneyProvided
-                    System.out.println("\n\nCurrent Money Provided: $" + vendingMachine.getCurrentMoneyProvided());
+                    System.out.println(System.lineSeparator() +"Current Money Provided: $" + vendingMachine.getCurrentMoneyProvided());
 
                     choice = (String) this.inventory.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
@@ -84,13 +84,12 @@ public class VendingMachineCLI {
                         if (choice.equals(RETURN_TO_MAIN_MENU)) {
                             inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
-                        if (choice.equals(SELECT_PRODUCT)) {
-                            vendingMachine.displayItems();
-                            if (choice.equals(vendingMachine.getInventory())) {}
-
-                        }
                     }
-
+                    if (choice.equals(SELECT_PRODUCT)) {
+                        vendingMachine.displayItems();
+                        vendingMachine.getSlotChoiceFromUserInput();
+                        vendingMachine.payForItem();
+                    }
 
                 }
 
