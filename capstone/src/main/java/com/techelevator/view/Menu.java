@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Menu {
 
@@ -50,14 +51,17 @@ public class Menu {
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
 	}
-	public void displayMenuOptionsForItems(Object[] options) {
-		out.println();
-//		String str = String.format("%1$-7s %2$-13s %3$12s %4$10s", "Slot", "Product Name", "Price", "Quantity");
-		//out.println(str);
-		for(int i = 0; i < options.length; i++) {
-			out.println(options[i]);
-		}
-		out.flush();
-	}
+	//Using vendingMachine method displayItems in CLI
+	//TODO Need to add slot key option in this class?
+
+//	public void displayMenuOptionsForItems(String[] options) {
+//		out.println();
+////		String str = String.format("%1$-7s %2$-13s %3$12s %4$10s", "Slot", "Product Name", "Price", "Quantity");
+//		//out.println(str);
+//		for(int i = 0; i < options.length; i++) {
+//			out.println(options[i]);
+//		}
+//		out.flush();
+//	}
 
 }

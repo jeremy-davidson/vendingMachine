@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class VendingMachine {
 
@@ -45,7 +46,7 @@ public class VendingMachine {
         this.inventory = loadInventory();
     }
 
-    public Map <String, Products> getInventory() {
+    public Map<String, Products> getInventory() {
         return inventory;
     }
 
@@ -83,26 +84,30 @@ public class VendingMachine {
         return inventory;
 
     }
-//public String[] displayItems() {// was working on this method for displaying items...PRINTING INFINITE LOOP!
-//        //    while (true) {
-////        String[] productArray = new String[getInventory().size()];
-////        int counter = 0;
-////        Set<Map.Entry<String, Products>> entrySet = getInventory().entrySet();
-////        for (Map.Entry<String, Products> entry : entrySet) {
-////            String key = entry.getKey();
-////            Products value = entry.getValue();
-////            productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
-////            counter++;
-////        }
-////        //System.out.println(productArray);
-////         for (int i = 0; i < counter; i++) {
-////            System.out.println(productArray[i]);
-////        }
-////
-////    }
-//}
 
+    public void displayItems() {// CLI is using this method for displaying items...
 
+        String[] productArray = new String[getInventory().size()];
+
+        Set<Map.Entry<String, Products>> entrySet = getInventory().entrySet();
+        int counter = 0;
+        for (Map.Entry<String, Products> entry : entrySet) {
+            String key = entry.getKey();
+            Products value = entry.getValue();
+            productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
+            counter++;
+        }
+        for (int i = 0; i < counter; i++) {
+            System.out.println(productArray[i]);
+        }
+
+    }
+    //working on this method to vend product... need to add slot key option in menu class?
+    public String vendProduct() {
+        return null;
+    }
 
 }
+
+
 
