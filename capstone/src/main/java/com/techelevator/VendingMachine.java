@@ -23,6 +23,7 @@ public class VendingMachine {
     private double startingBalance = 0;
     public double currentMoneyProvided = 0;
     private Map<String, Products> inventory;
+    private List<String> list = getList();
 
 
     public double getStartingBalance() {
@@ -100,8 +101,32 @@ public class VendingMachine {
         for (int i = 0; i < counter; i++) {
             System.out.println(productArray[i]);
         }
-
     }
+    //*****this is SUPPOSED to write a new file log.txt when run... cant test functionality until we figure out vending classes
+        public void logFile() throws IOException  {
+            File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
+            //List<String> list = getList();
+            try(FileWriter logWriter = new FileWriter(outputFile, true)){
+                for(String str : list) {
+                    logWriter.write(str);
+                    logWriter.write("\n");
+                }
+            }
+        }
+        public List<String> log(String name, double startingBalance, double endAmount) {
+
+            LocalDateTime time = LocalDateTime.now();
+            DecimalFormat format = new DecimalFormat("#.00");
+            String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
+            //List<String> list = getList();
+            list.add(str);
+            return list;
+        }
+        public List<String> getList(){
+            return this.list;
+        }
+
+   // }
     //working on this method to vend product... need to add slot key option in menu class?
     public String vendProduct() {
         return null;
