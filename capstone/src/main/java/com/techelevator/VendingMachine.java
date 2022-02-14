@@ -1,6 +1,5 @@
 package com.techelevator;
 
-import com.techelevator.view.Menu;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,15 +8,12 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
+
 
 public class VendingMachine {
 
-//    public static void main(String[] args) {
-//
-//        VendingMachine vendingMachine = new VendingMachine();
-//    }
 
     //variables
     private double startingBalance = 0;
@@ -129,26 +125,38 @@ public class VendingMachine {
         return this.list;
     }
 
-    //working on this method to vend product... need to add slot key option in menu class?
-    public String getSlotChoiceFromUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        String slotChoice = null;
-        System.out.print(System.lineSeparator() + "Please input slot location for desired item >>> ");
-        slotChoice = scanner.nextLine();
-        if (slotChoice == null || slotChoice == " ") {
-            System.out.println(System.lineSeparator() + "*** " + slotChoice + " is not a valid option ***" + System.lineSeparator());
-        }
-        return slotChoice;
-    }
-    //method only working if selection is entered twice?
-    public void payForItem() {
-        {
-            currentMoneyProvided = currentMoneyProvided - inventory.get(getSlotChoiceFromUserInput()).getPrice();
+    //working on this method to vend product...
+    public void selectItemToVend() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            String slotChoice = null;
+            System.out.print(System.lineSeparator() + "Please input slot location for desired item >>> ");
+            slotChoice = scanner.nextLine().toUpperCase();
 
+            if (!inventory.containsKey(slotChoice) || slotChoice.equals(" ")) {
+                System.out.println(System.lineSeparator() + "Sorry, " + slotChoice + " is not a valid selection");
+                //Needs to return to Purchase Menu
+            }
+            if (!inventory.get(slotChoice.toUpperCase()).inStock()) {
+                System.out.println(System.lineSeparator() + "Sorry, " + inventory.get(slotChoice).getName() + " is not available\n Please make another selection");
+                //Needs to return to Purchase Menu
+            } else if (inventory.get(slotChoice).getPrice() > currentMoneyProvided) {
+                System.out.println(System.lineSeparator() + "Please deposit more funds");
+                //Needs to return to Purchase Menu
+            } else {
+                System.out.println(System.lineSeparator() + "Dispensing " + inventory.get(slotChoice).getName() + " for $" + inventory.get(slotChoice).getPrice());
+                System.out.println(System.lineSeparator() + inventory.get(slotChoice).getMessage());
+                currentMoneyProvided = currentMoneyProvided - inventory.get(slotChoice).getPrice();
+                inventory.get(slotChoice).purchaseItem();
+            }
+        } catch (Exception e) {
+            System.out.println("Something went wrong...");
         }
     }
-
 }
+
+
+
 
 
 

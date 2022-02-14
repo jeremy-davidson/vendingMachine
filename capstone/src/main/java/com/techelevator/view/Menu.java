@@ -43,18 +43,18 @@ public class Menu {
 		}
 		return choice;
 	}
-	//Get Slot selection from user...
-
-	public String getSlotChoiceFromUserInput() {
-		String slotChoice = null;
-		System.out.println("Please input slot location for desired item >>>");
-		slotChoice = in.nextLine();
-
-		if (slotChoice == null || slotChoice == " ") {
-			out.println(System.lineSeparator() + "*** " + slotChoice + " is not a valid option ***" + System.lineSeparator());
-		}
-		return slotChoice;
-	}
+	//Get Slot selection from user using vendingMachine
+//
+//	public String getSlotChoiceFromUserInput() {
+//		String slotChoice = null;
+//		System.out.println("Please input slot location for desired item >>>");
+//		slotChoice = in.nextLine();
+//
+//		if (slotChoice == null || slotChoice == " ") {
+//			out.println(System.lineSeparator() + "*** " + slotChoice + " is not a valid option ***" + System.lineSeparator());
+//		}
+//		return slotChoice;
+//	}
 
 	private void displayMenuOptions(Object[] options) {
 		out.println();
@@ -68,14 +68,14 @@ public class Menu {
 	//Using vendingMachine method displayItems in CLI
 	//TODO Need to add slot key option in this class?
 
-	public void displayMenuOptionsForItems(String[] options) {
-		out.println();
-//		String str = String.format("%1$-7s %2$-13s %3$12s %4$10s", "Slot", "Product Name", "Price", "Quantity");
-		//out.println(str);
-		for(int i = 0; i < options.length; i++) {
-			out.println(options[i]);
-		}
-		out.flush();
-	}
+//	public void displayMenuOptionsForItems(String[] options) {
+//		out.println();
+////		String str = String.format("%1$-7s %2$-13s %3$12s %4$10s", "Slot", "Product Name", "Price", "Quantity");
+//		//out.println(str);
+//		for(int i = 0; i < options.length; i++) {
+//			out.println(options[i]);
+//		}
+//		out.flush();
+//	}
 
 }

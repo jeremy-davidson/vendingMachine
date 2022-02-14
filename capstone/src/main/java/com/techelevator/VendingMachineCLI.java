@@ -48,19 +48,19 @@ public class VendingMachineCLI {
                 //display items using vendingMachine method
                 vendingMachine.displayItems();
             }
-                while (true) {
-                    String[] productArray = new String[vendingMachine.getInventory().size()];
-                    int counter = 0;
-                    Set<Map.Entry<String, Products>> entrySet = vendingMachine.getInventory().entrySet();
-                    for (Map.Entry<String, Products> entry : entrySet) {
-                        String key = entry.getKey();
-                        Products value = entry.getValue();
-                        productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
-                        counter++;
-                    }
-                    this.inventory.displayMenuOptionsForItems(productArray);
-                    break;
-                }
+//                while (true) {
+//                    String[] productArray = new String[vendingMachine.getInventory().size()];
+//                    int counter = 0;
+//                    Set<Map.Entry<String, Products>> entrySet = vendingMachine.getInventory().entrySet();
+//                    for (Map.Entry<String, Products> entry : entrySet) {
+//                        String key = entry.getKey();
+//                        Products value = entry.getValue();
+//                        productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
+//                        counter++;
+//                    }
+//                    this.inventory.displayMenuOptionsForItems(productArray);
+//                    break;
+//                }
 
             if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 
@@ -87,8 +87,7 @@ public class VendingMachineCLI {
                     }
                     if (choice.equals(SELECT_PRODUCT)) {
                         vendingMachine.displayItems();
-                        vendingMachine.getSlotChoiceFromUserInput();
-                        vendingMachine.payForItem();
+                        vendingMachine.selectItemToVend();
                     }
 
                 }
