@@ -17,7 +17,11 @@ public class VendingMachineCLI {
     private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
     private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
+
+    //TODO talk this over, not really sure what this does
     private static final String MAIN_MENU_OPTION_TRANSACTION_LOG = "";
+
+
     private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_TRANSACTION_LOG};
     private static final String RETURN_TO_MAIN_MENU = "Return to Main Menu";
     private static final String FEED_MONEY = "Feed Money";
@@ -106,14 +110,27 @@ public class VendingMachineCLI {
 
 
             }
-            if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+            //moved to a bigger version of the exit call below
+//            if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+//                System.out.println("***Thank you for using Vendo-Matic 800!***");
+//                System.exit(1);
+//            }
+            if(choice.equals(MAIN_MENU_OPTION_EXIT)){
+                //you already used this for finish transaction
+                //vendingMachine.returnChange();
+                vendingMachine.logFile();
+                vendingMachine.getList();
+                vendingMachine.currentMoneyProvided = 0;
+
+
                 System.out.println("***Thank you for using Vendo-Matic 800!***");
                 System.exit(1);
+                break;
+                }
             }
 
         }
 
 
     }
-}
 
