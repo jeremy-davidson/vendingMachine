@@ -19,7 +19,7 @@ public class VendingMachine {
     private double startingBalance = 0;
     public double currentMoneyProvided = 0;
     private Map<String, Products> inventory;
-    public List<String> list;
+    public List<String> list = new ArrayList<>();
 
 
     public double getStartingBalance() {
@@ -99,7 +99,7 @@ public class VendingMachine {
             System.out.println(productArray[i]);
         }
     }
-
+    //TODO needs to append the file instead of overwriting it each time...
     //*****this is SUPPOSED to write a new file log.txt when run... cant test functionality until we figure out vending classes
     public void logFile() /*throws IOException*/ {
         File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
@@ -109,10 +109,12 @@ public class VendingMachine {
                 logWriter.write(str);
                 logWriter.write("\n");
             }
-        }catch (IOException e) {
-            System.out.println("File location not valid");}
+        } catch (IOException e) {
+            System.out.println("File location not valid");
+        }
     }
 
+    //TODO combine with logFile method and call at each transaction point...
     public void log(String name, double startingBalance, double endAmount) {
 
         LocalDateTime time = LocalDateTime.now();
@@ -127,7 +129,7 @@ public class VendingMachine {
         System.out.println(list);
     }
 
-    //working on this method to vend product...
+    //This method to vend product is now working correctly
     public void selectItemToVend() {
         try {
             Scanner scanner = new Scanner(System.in);
@@ -145,12 +147,13 @@ public class VendingMachine {
             } else if (inventory.get(slotChoice).getPrice() > currentMoneyProvided) {
                 System.out.println(System.lineSeparator() + "Please deposit more funds");
 
-            } else {
+            } else {//introduce Products product to replace inventory calls?
                 System.out.println(System.lineSeparator() + "Dispensing " + inventory.get(slotChoice).getName() + " for $" + inventory.get(slotChoice).getPrice());
                 System.out.println(System.lineSeparator() + inventory.get(slotChoice).getMessage());
                 currentMoneyProvided = currentMoneyProvided - inventory.get(slotChoice).getPrice();
                 inventory.get(slotChoice).purchaseItem();
 
+                //TODO all transactions need to be logged
                 log(inventory.get(slotChoice).getName(), startingBalance, currentMoneyProvided);
             }
         } catch (Exception e) {

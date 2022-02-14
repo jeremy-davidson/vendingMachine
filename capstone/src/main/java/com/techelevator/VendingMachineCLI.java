@@ -90,7 +90,8 @@ public class VendingMachineCLI {
                             vendingMachine.feedMoney(10.00);
                         }
                         if (choice.equals(RETURN_TO_MAIN_MENU)) {
-                            inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+
+                            //inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
                     }
                     if (choice.equals(SELECT_PRODUCT)) {
@@ -100,7 +101,8 @@ public class VendingMachineCLI {
                     if (choice.equals(FINISH_TRANSACTION)) {
                         //Receive change, return to main menu
                         vendingMachine.returnChange();
-                        inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+                        break;
+                        //inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                     }
                 }
 
@@ -109,6 +111,7 @@ public class VendingMachineCLI {
             if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
                 System.out.println("***Thank you for using Vendo-Matic 800!***");
                 System.exit(1);
+                //could put break instead
             }
 
         }
