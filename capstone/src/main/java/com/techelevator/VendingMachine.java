@@ -19,11 +19,11 @@ public class VendingMachine {
     private double startingBalance = 0;
     public double currentMoneyProvided = 0;
     private Map<String, Products> inventory;
-    private List<String> list = getList();
+    public List<String> list;
 
 
     public double getStartingBalance() {
-        return startingBalance;
+        return startingBalance + currentMoneyProvided;
     }
 
     public double getCurrentMoneyProvided() {
@@ -83,10 +83,11 @@ public class VendingMachine {
     }
 
     public void displayItems() {// CLI is using this method for displaying items...
+        Map<String, Products> sortedInventory = new TreeMap<>(getInventory());
 
         String[] productArray = new String[getInventory().size()];
 
-        Set<Map.Entry<String, Products>> entrySet = getInventory().entrySet();
+        Set<Map.Entry<String, Products>> entrySet = sortedInventory.entrySet();
         int counter = 0;
         for (Map.Entry<String, Products> entry : entrySet) {
             String key = entry.getKey();
@@ -100,7 +101,7 @@ public class VendingMachine {
     }
 
     //*****this is SUPPOSED to write a new file log.txt when run... cant test functionality until we figure out vending classes
-    public void logFile() throws IOException {
+    public void logFile() /*throws IOException*/ {
         File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
         //List<String> list = getList();
         try (FileWriter logWriter = new FileWriter(outputFile, true)) {
@@ -108,21 +109,22 @@ public class VendingMachine {
                 logWriter.write(str);
                 logWriter.write("\n");
             }
-        }
+        }catch (IOException e) {
+            System.out.println("File location not valid");}
     }
 
-    public List<String> log(String name, double startingBalance, double endAmount) {
+    public void log(String name, double startingBalance, double endAmount) {
 
         LocalDateTime time = LocalDateTime.now();
         DecimalFormat format = new DecimalFormat("#.00");
         String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
         //List<String> list = getList();
         list.add(str);
-        return list;
     }
 
-    public List<String> getList() {
-        return this.list;
+    public void getList() {
+        //return this.list;
+        System.out.println(list);
     }
 
     //working on this method to vend product...
@@ -135,23 +137,33 @@ public class VendingMachine {
 
             if (!inventory.containsKey(slotChoice) || slotChoice.equals(" ")) {
                 System.out.println(System.lineSeparator() + "Sorry, " + slotChoice + " is not a valid selection");
-                //Needs to return to Purchase Menu
+
             }
             if (!inventory.get(slotChoice.toUpperCase()).inStock()) {
                 System.out.println(System.lineSeparator() + "Sorry, " + inventory.get(slotChoice).getName() + " is not available\n Please make another selection");
-                //Needs to return to Purchase Menu
+
             } else if (inventory.get(slotChoice).getPrice() > currentMoneyProvided) {
                 System.out.println(System.lineSeparator() + "Please deposit more funds");
-                //Needs to return to Purchase Menu
+
             } else {
                 System.out.println(System.lineSeparator() + "Dispensing " + inventory.get(slotChoice).getName() + " for $" + inventory.get(slotChoice).getPrice());
                 System.out.println(System.lineSeparator() + inventory.get(slotChoice).getMessage());
                 currentMoneyProvided = currentMoneyProvided - inventory.get(slotChoice).getPrice();
                 inventory.get(slotChoice).purchaseItem();
+
+                log(inventory.get(slotChoice).getName(), startingBalance, currentMoneyProvided);
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong...");
+            System.out.println("Return to Purchase menu...");
         }
+    }
+
+    public void returnChange() {
+        if (currentMoneyProvided > 0) {
+            ChangeCalculator changeCalculator = new ChangeCalculator();
+            changeCalculator.change(currentMoneyProvided);
+        }
+        currentMoneyProvided = 0;
     }
 }
 

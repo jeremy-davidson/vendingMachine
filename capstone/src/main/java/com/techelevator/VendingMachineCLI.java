@@ -2,6 +2,7 @@ package com.techelevator;
 
 import com.techelevator.view.Menu;
 
+import javax.imageio.IIOException;
 import java.sql.SQLOutput;
 import java.util.*;
 
@@ -16,7 +17,8 @@ public class VendingMachineCLI {
     private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
     private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
+    private static final String MAIN_MENU_OPTION_TRANSACTION_LOG = "";
+    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_TRANSACTION_LOG};
     private static final String RETURN_TO_MAIN_MENU = "Return to Main Menu";
     private static final String FEED_MONEY = "Feed Money";
     private static final String SELECT_PRODUCT = "Select Product";
@@ -44,6 +46,12 @@ public class VendingMachineCLI {
         while (true) {
             String choice = (String) this.inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
+            //TODO log methods not working yet...
+            if (choice.equals(MAIN_MENU_OPTION_TRANSACTION_LOG)) {
+                vendingMachine.getList();
+                vendingMachine.logFile();
+            }
+
             if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
                 //display items using vendingMachine method
                 vendingMachine.displayItems();
@@ -66,7 +74,7 @@ public class VendingMachineCLI {
 
                 while (true) {
                     //print currentMoneyProvided
-                    System.out.println(System.lineSeparator() +"Current Money Provided: $" + vendingMachine.getCurrentMoneyProvided());
+                    System.out.println(System.lineSeparator() + "Current Money Provided: $" + vendingMachine.getCurrentMoneyProvided());
 
                     choice = (String) this.inventory.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
@@ -89,17 +97,23 @@ public class VendingMachineCLI {
                         vendingMachine.displayItems();
                         vendingMachine.selectItemToVend();
                     }
-
+                    if (choice.equals(FINISH_TRANSACTION)) {
+                        //Receive change, return to main menu
+                        vendingMachine.returnChange();
+                        inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+                    }
                 }
 
 
             }
+            if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+                System.out.println("***Thank you for using Vendo-Matic 800!***");
+                System.exit(1);
+            }
+
         }
 
-//        } else {
-//            System.out.println("***Thank you for using Vendo-Matic 800!***");
-//            System.exit(1);
-//        }
+
     }
 }
 

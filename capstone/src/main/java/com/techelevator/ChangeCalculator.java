@@ -32,7 +32,7 @@ public class ChangeCalculator {
             coins = coins - 0.01;
         }
 //TODO create child class change to hold change
-        System.out.println("Your change is " + quarters + " quarters, " + dimes + " dimes and " + nickles + " nickles.");
+        System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters, " + dimes + " dimes and " + nickles + " nickles.");
     }
 
 
