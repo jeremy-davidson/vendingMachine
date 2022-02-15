@@ -18,6 +18,8 @@ public class VendingMachine {
     //variables
     private double startingBalance = 0;
     public double currentMoneyProvided = 0;
+    //added new double
+    public double beginningBalance = 0;
     private Map<String, Products> inventory;
     public List<String> list = new ArrayList<>();
 
