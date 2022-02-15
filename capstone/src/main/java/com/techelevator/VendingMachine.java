@@ -18,6 +18,7 @@ public class VendingMachine {
     //variables
     private double startingBalance = 0;
     public double currentMoneyProvided = 0;
+    public double endAmount = 0;
     //added new double
     public double beginningBalance = 0;
     private Map<String, Products> inventory;
@@ -25,7 +26,11 @@ public class VendingMachine {
 
 
     public double getStartingBalance() {
-        return startingBalance + currentMoneyProvided;
+        return startingBalance;
+    }
+
+    public double getendAmount() {
+        return endAmount;
     }
 
     public double getCurrentMoneyProvided() {
@@ -33,7 +38,13 @@ public class VendingMachine {
     }
 
     public void feedMoney(double moneyFed) {
-        currentMoneyProvided = currentMoneyProvided + moneyFed;
+        startingBalance = startingBalance + currentMoneyProvided;
+        endAmount = currentMoneyProvided + moneyFed;
+        currentMoneyProvided = endAmount;
+        logFile("FEED MONEY", startingBalance, endAmount);
+
+
+
     }
 
 
@@ -168,12 +179,15 @@ public class VendingMachine {
 
     public void returnChange() {
         if (currentMoneyProvided > 0) {
+            startingBalance = startingBalance + currentMoneyProvided;
             ChangeCalculator changeCalculator = new ChangeCalculator();
             changeCalculator.change(currentMoneyProvided);
         }
         currentMoneyProvided = 0;
+        logFile("GIVE CHANGE", startingBalance, currentMoneyProvided);
     }
 }
+
 
 
 
