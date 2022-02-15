@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -116,9 +117,11 @@ public class VendingMachine {
 //combined and still does the same function? lol
     public void logFile(String name, double startingBalance, double endAmount) /*throws IOException*/ {
         File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
-        LocalDateTime time = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String time1 = now.format(time);
         DecimalFormat format = new DecimalFormat("#.00");
-        String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
+        String str = time1 + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
         list.add(str);
         try (FileWriter logWriter = new FileWriter(outputFile, true)) {
             for (String str2 : list) {
