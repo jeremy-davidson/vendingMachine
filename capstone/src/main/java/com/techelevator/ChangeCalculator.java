@@ -31,8 +31,21 @@ public class ChangeCalculator {
             pennies = pennies + 1;
             coins = coins - 0.01;
         }
+
+        if ((dimes == 0) && (nickles == 0)) {
+            System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters.");
+        }
+        else if (nickles == 0) {
+            System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters and " + dimes + " dimes.");
+        } else if (dimes == 0) {
+            System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters and " + nickles + " nickles.");
+        } else {
+
 //TODO create child class change to hold change
-        System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters, " + dimes + " dimes and " + nickles + " nickles.");
+
+            //TODO if statements for blank change (nuke "0 nickles")
+            System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters, " + dimes + " dimes and " + nickles + " nickles.");
+        }
     }
 
 

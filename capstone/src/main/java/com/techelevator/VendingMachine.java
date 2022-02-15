@@ -99,14 +99,17 @@ public class VendingMachine {
             System.out.println(productArray[i]);
         }
     }
-    //TODO needs to append the file instead of overwriting it each time...
-    //*****this is SUPPOSED to write a new file log.txt when run... cant test functionality until we figure out vending classes
-    public void logFile() /*throws IOException*/ {
+
+//combined and still does the same function? lol
+    public void logFile(String name, double startingBalance, double endAmount) /*throws IOException*/ {
         File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
-        //List<String> list = getList();
+        LocalDateTime time = LocalDateTime.now();
+        DecimalFormat format = new DecimalFormat("#.00");
+        String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
+        list.add(str);
         try (FileWriter logWriter = new FileWriter(outputFile, true)) {
-            for (String str : list) {
-                logWriter.write(str);
+            for (String str2 : list) {
+                logWriter.write(str2);
                 logWriter.write("\n");
             }
         } catch (IOException e) {
@@ -115,14 +118,14 @@ public class VendingMachine {
     }
 
     //TODO combine with logFile method and call at each transaction point...
-    public void log(String name, double startingBalance, double endAmount) {
-
-        LocalDateTime time = LocalDateTime.now();
-        DecimalFormat format = new DecimalFormat("#.00");
-        String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
-        //List<String> list = getList();
-        list.add(str);
-    }
+//    public void log(String name, double startingBalance, double endAmount) {
+//
+//        LocalDateTime time = LocalDateTime.now();
+//        DecimalFormat format = new DecimalFormat("#.00");
+//        String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
+//        //List<String> list = getList();
+//        list.add(str);
+//    }
 
     public void getList() {
         //return this.list;
@@ -154,7 +157,7 @@ public class VendingMachine {
                 inventory.get(slotChoice).purchaseItem();
 
                 //TODO all transactions need to be logged
-                log(inventory.get(slotChoice).getName(), startingBalance, currentMoneyProvided);
+                logFile(inventory.get(slotChoice).getName(), startingBalance, currentMoneyProvided);
             }
         } catch (Exception e) {
             System.out.println("Return to Purchase menu...");

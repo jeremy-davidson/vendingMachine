@@ -17,9 +17,7 @@ public class VendingMachineCLI {
     private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
     private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-    private static final String MAIN_MENU_OPTION_TRANSACTION_LOG = "";
-    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_TRANSACTION_LOG};
-    private static final String RETURN_TO_MAIN_MENU = "Return to Main Menu";
+    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
     private static final String FEED_MONEY = "Feed Money";
     private static final String SELECT_PRODUCT = "Select Product";
     private static final String FINISH_TRANSACTION = "Finish Transaction";
@@ -27,12 +25,11 @@ public class VendingMachineCLI {
     private static final String FEED_ONE_DOLLAR = "Feed One Dollar";
     private static final String FEED_FIVE_DOLLARS = "Feed Five Dollars";
     private static final String FEED_TEN_DOLLARS = "Feed Ten Dollars";
-    private static final String[] FEED_MONEY_OPTIONS = {FEED_ONE_DOLLAR, FEED_FIVE_DOLLARS, FEED_TEN_DOLLARS, RETURN_TO_MAIN_MENU};
+    private static final String[] FEED_MONEY_OPTIONS = {FEED_ONE_DOLLAR, FEED_FIVE_DOLLARS, FEED_TEN_DOLLARS};
 
     private Menu inventory;
     private VendingMachine vendingMachine;
     private Products products;
-    //List<Products> purchasedProducts = new ArrayList<>();
 
     public VendingMachineCLI(Menu menu) {
         this.inventory = menu;
@@ -46,29 +43,13 @@ public class VendingMachineCLI {
         while (true) {
             String choice = (String) this.inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
-            //TODO log methods not working yet...
-            if (choice.equals(MAIN_MENU_OPTION_TRANSACTION_LOG)) {
-                vendingMachine.getList();
-                vendingMachine.logFile();
-            }
+
 
             if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
                 //display items using vendingMachine method
                 vendingMachine.displayItems();
             }
-//                while (true) {
-//                    String[] productArray = new String[vendingMachine.getInventory().size()];
-//                    int counter = 0;
-//                    Set<Map.Entry<String, Products>> entrySet = vendingMachine.getInventory().entrySet();
-//                    for (Map.Entry<String, Products> entry : entrySet) {
-//                        String key = entry.getKey();
-//                        Products value = entry.getValue();
-//                        productArray[counter] = "Slot: " + key + " | " + "Item: " + value.getName() + " | " + "Price: " + "$" + value.getPrice() + " | " + "Quantity: " + value.getNumberInStock();
-//                        counter++;
-//                    }
-//                    this.inventory.displayMenuOptionsForItems(productArray);
-//                    break;
-//                }
+
 
             if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 
@@ -89,10 +70,6 @@ public class VendingMachineCLI {
                         if (choice.equals(FEED_TEN_DOLLARS)) {
                             vendingMachine.feedMoney(10.00);
                         }
-                        if (choice.equals(RETURN_TO_MAIN_MENU)) {
-
-                            //inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-                        }
                     }
                     if (choice.equals(SELECT_PRODUCT)) {
                         vendingMachine.displayItems();
@@ -102,7 +79,6 @@ public class VendingMachineCLI {
                         //Receive change, return to main menu
                         vendingMachine.returnChange();
                         break;
-                        //inventory.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                     }
                 }
 
