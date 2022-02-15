@@ -111,10 +111,7 @@ public class VendingMachineCLI {
             if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
                 System.out.println("***Thank you for using Vendo-Matic 800!***");
                 System.exit(1);
-<<<<<<< HEAD
                 //could put break instead
-=======
->>>>>>> 120427c9f218e5c96cadeff4ec1ca5b4261d0188
             }
 
         }
