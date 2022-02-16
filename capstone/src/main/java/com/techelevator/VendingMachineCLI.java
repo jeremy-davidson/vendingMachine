@@ -55,7 +55,7 @@ public class VendingMachineCLI {
 
                 while (true) {
                     //print currentMoneyProvided
-                    System.out.println(System.lineSeparator() + "Current Money Provided: $" + vendingMachine.getCurrentMoneyProvided());
+                    System.out.println(System.lineSeparator() + "Current Money Provided: $" + vendingMachine.getCurrentBalance());
 
                     choice = (String) this.inventory.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 

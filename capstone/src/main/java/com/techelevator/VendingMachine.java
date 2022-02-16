@@ -18,10 +18,8 @@ public class VendingMachine {
 
     //variables
     private double startingBalance = 0;
-    public double currentMoneyProvided = 0;
-    public double endAmount = 0;
-    //added new double
-    public double beginningBalance = 0;
+    public double currentBalance = 0;
+    public double endingBalance = 0;
     private Map<String, Products> inventory;
     public List<String> list = new ArrayList<>();
 
@@ -30,19 +28,19 @@ public class VendingMachine {
         return startingBalance;
     }
 
-    public double getendAmount() {
-        return endAmount;
+    public double getEndingBalance() {
+        return endingBalance;
     }
 
-    public double getCurrentMoneyProvided() {
-        return currentMoneyProvided;
+    public double getCurrentBalance() {
+        return currentBalance;
     }
 
     public void feedMoney(double moneyFed) {
-        startingBalance = startingBalance + currentMoneyProvided;
-        endAmount = currentMoneyProvided + moneyFed;
-        currentMoneyProvided = endAmount;
-        logFile("FEED MONEY", startingBalance, endAmount);
+        startingBalance = startingBalance + currentBalance;
+        endingBalance = currentBalance + moneyFed;
+        currentBalance = endingBalance;
+        logFile("FEED MONEY", startingBalance, endingBalance);
 
 
 
@@ -115,13 +113,13 @@ public class VendingMachine {
     }
 
 //combined and still does the same function? lol
-    public void logFile(String name, double startingBalance, double endAmount) /*throws IOException*/ {
+    public void logFile(String name, double startingBalance, double endingBalance) /*throws IOException*/ {
         File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String time1 = now.format(time);
         DecimalFormat format = new DecimalFormat("#.00");
-        String str = time1 + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
+        String str = time1 + " " + name + " $" + getStartingBalance() + " $" + format.format(endingBalance);
         list.add(str);
         try (FileWriter logWriter = new FileWriter(outputFile, true)) {
             for (String str2 : list) {
@@ -163,17 +161,18 @@ public class VendingMachine {
             if (!inventory.get(slotChoice.toUpperCase()).inStock()) {
                 System.out.println(System.lineSeparator() + "Sorry, " + inventory.get(slotChoice).getName() + " is not available\n Please make another selection");
 
-            } else if (inventory.get(slotChoice).getPrice() > currentMoneyProvided) {
+            } else if (inventory.get(slotChoice).getPrice() > currentBalance) {
                 System.out.println(System.lineSeparator() + "Please deposit more funds");
 
             } else {//introduce Products product to replace inventory calls?
                 System.out.println(System.lineSeparator() + "Dispensing " + inventory.get(slotChoice).getName() + " for $" + inventory.get(slotChoice).getPrice());
                 System.out.println(System.lineSeparator() + inventory.get(slotChoice).getMessage());
-                currentMoneyProvided = currentMoneyProvided - inventory.get(slotChoice).getPrice();
+                startingBalance = currentBalance;
+                currentBalance = currentBalance - inventory.get(slotChoice).getPrice();
                 inventory.get(slotChoice).purchaseItem();
 
                 //TODO all transactions need to be logged
-                logFile(inventory.get(slotChoice).getName(), startingBalance, currentMoneyProvided);
+                logFile(inventory.get(slotChoice).getName(), startingBalance, currentBalance);
             }
         } catch (Exception e) {
             System.out.println("Return to Purchase menu...");
@@ -181,13 +180,14 @@ public class VendingMachine {
     }
 
     public void returnChange() {
-        if (currentMoneyProvided > 0) {
-            startingBalance = startingBalance + currentMoneyProvided;
+        if (currentBalance > 0) {
+            startingBalance = currentBalance;
             ChangeCalculator changeCalculator = new ChangeCalculator();
-            changeCalculator.change(currentMoneyProvided);
+            changeCalculator.change(currentBalance);
         }
-        currentMoneyProvided = 0;
-        logFile("GIVE CHANGE", startingBalance, currentMoneyProvided);
+        currentBalance = 0;
+        endingBalance = 0;
+        logFile("GIVE CHANGE", startingBalance, endingBalance);
     }
 }
 
