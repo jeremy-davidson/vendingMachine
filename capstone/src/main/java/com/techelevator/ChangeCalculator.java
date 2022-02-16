@@ -40,9 +40,6 @@ public class ChangeCalculator {
             System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters and " + nickles + " nickles.");
         } else {
 
-//TODO create child class change to hold change
-
-            //TODO if statements for blank change (nuke "0 nickles")
             System.out.println(System.lineSeparator() + "Your change is " + quarters + " quarters, " + dimes + " dimes and " + nickles + " nickles.");
         }
     }

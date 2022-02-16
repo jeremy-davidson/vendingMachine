@@ -15,11 +15,10 @@ import java.util.regex.Pattern;
 
 public class VendingMachine {
 
-
     //variables
-    private double startingBalance = 0;
-    public double currentBalance = 0;
-    public double endingBalance = 0;
+    private double startingBalance = 0.00;
+    public double currentBalance = 0.00;
+    public double endingBalance = 0.00;
     private Map<String, Products> inventory;
     public List<String> list = new ArrayList<>();
 
@@ -40,15 +39,9 @@ public class VendingMachine {
         startingBalance = startingBalance + currentBalance;
         endingBalance = currentBalance + moneyFed;
         currentBalance = endingBalance;
-        logFile("FEED MONEY", startingBalance, endingBalance);
-
-
+        log("FEED MONEY", startingBalance, endingBalance);
 
     }
-
-
-//    String path = "C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\vendingmachine.csv";
-//    File inputFile = new File(path);
 
     //constructor
     public VendingMachine() {
@@ -112,15 +105,9 @@ public class VendingMachine {
         }
     }
 
-//combined and still does the same function? lol
-    public void logFile(String name, double startingBalance, double endingBalance) /*throws IOException*/ {
+    public void logFile() {
         File outputFile = new File("C:\\Users\\Student\\workspace\\capstone-1-team-0\\capstone\\log.txt");
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String time1 = now.format(time);
-        DecimalFormat format = new DecimalFormat("#.00");
-        String str = time1 + " " + name + " $" + getStartingBalance() + " $" + format.format(endingBalance);
-        list.add(str);
+
         try (FileWriter logWriter = new FileWriter(outputFile, true)) {
             for (String str2 : list) {
                 logWriter.write(str2);
@@ -131,19 +118,15 @@ public class VendingMachine {
         }
     }
 
-    //TODO combine with logFile method and call at each transaction point...
-//    public void log(String name, double startingBalance, double endAmount) {
-//
-//        LocalDateTime time = LocalDateTime.now();
-//        DecimalFormat format = new DecimalFormat("#.00");
-//        String str = time + " " + name + " " + getStartingBalance() + " " + format.format(endAmount);
-//        //List<String> list = getList();
-//        list.add(str);
-//    }
+    public void log(String name, double startingBalance, double endingBalance) {
 
-    public void getList() {
-        //return this.list;
-        System.out.println(list);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String time1 = now.format(time);
+        DecimalFormat format = new DecimalFormat("#.00");
+        String str = time1 + " " + name + " $" + format.format(startingBalance) + " $" + format.format(endingBalance);
+
+        list.add(str);
     }
 
     //This method to vend product is now working correctly
@@ -164,15 +147,16 @@ public class VendingMachine {
             } else if (inventory.get(slotChoice).getPrice() > currentBalance) {
                 System.out.println(System.lineSeparator() + "Please deposit more funds");
 
-            } else {//introduce Products product to replace inventory calls?
+            } else {
                 System.out.println(System.lineSeparator() + "Dispensing " + inventory.get(slotChoice).getName() + " for $" + inventory.get(slotChoice).getPrice());
                 System.out.println(System.lineSeparator() + inventory.get(slotChoice).getMessage());
                 startingBalance = currentBalance;
-                currentBalance = currentBalance - inventory.get(slotChoice).getPrice();
+                endingBalance = (currentBalance - inventory.get(slotChoice).getPrice());
+                currentBalance = endingBalance;
                 inventory.get(slotChoice).purchaseItem();
 
-                //TODO all transactions need to be logged
-                logFile(inventory.get(slotChoice).getName(), startingBalance, currentBalance);
+
+                log(inventory.get(slotChoice).getName(), startingBalance, endingBalance);
             }
         } catch (Exception e) {
             System.out.println("Return to Purchase menu...");
@@ -187,7 +171,7 @@ public class VendingMachine {
         }
         currentBalance = 0;
         endingBalance = 0;
-        logFile("GIVE CHANGE", startingBalance, endingBalance);
+        log("GIVE CHANGE", startingBalance, endingBalance);
     }
 }
 
