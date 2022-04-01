@@ -29,7 +29,7 @@ public abstract class Products {
         return numberInStock;
     }
 
-    //abstract so it can be overriden in each product child class
+    //abstract so it can be overridden in each product child class
     public abstract String getMessage();
 
 
